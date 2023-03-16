@@ -633,6 +633,7 @@ export async function createServer(
 
   // html fallback
   if (config.appType === 'spa' || config.appType === 'mpa') {
+    // NOTE: 获取html页面 localhost:host/[path]/ -> localhost:host/[path]index.html
     middlewares.use(htmlFallbackMiddleware(root, config.appType === 'spa'))
   }
 
@@ -643,6 +644,7 @@ export async function createServer(
 
   if (config.appType === 'spa' || config.appType === 'mpa') {
     // transform index.html
+    // NOTE: 转换 html 内容，加入js
     middlewares.use(indexHtmlMiddleware(server))
 
     // handle 404s
